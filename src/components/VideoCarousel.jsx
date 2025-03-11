@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import { hightlightsSlides } from "../constants";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
+gsap.registerPlugin(ScrollTrigger);
 import { pauseImg, playImg, replayImg } from "../utils";
 
 const VideoCarousel = () => {
@@ -29,8 +31,8 @@ const VideoCarousel = () => {
 
         gsap.to("#video", {
             scrollTrigger: {
-                trigger: "#video",
-                toggleActions: "restart none none none",
+              trigger: "#video",
+              toggleActions: "restart none none none",
             },
             onComplete: () => {
                 setVideo((prevVideo) => ({
@@ -205,7 +207,7 @@ const VideoCarousel = () => {
                         <span
                             key={i}
                             ref={(el) => (videoDivRef.current[i] = el)}
-                            className="mx-2 w-3 h-3 bg-gray-200 rounded-full relative cursor-pointer"
+                            className="mx-2 w-3 h-3 bg-gray-200 rounded-full relative"
                         >
                             <span
                                 className="absolute h-full w-full rounded-full"
