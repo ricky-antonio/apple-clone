@@ -81,7 +81,7 @@ const HowItWorks = () => {
                                 best graphic performance by far.
                             </span>
                         </p>
-
+                        <br />
                         <p className="hiw-text g_fadeIn">
                             Mobile{" "}
                             <span className="text-white">
