@@ -69,19 +69,15 @@ const VideoCarousel = () => {
                     if (progress !== currentProgress) {
                         currentProgress = progress;
 
-                        gsap.to(videoDivRef.current[videoId], {
-                            width:
-                                window.innerWidth < 760
-                                    ? "10vw"
-                                    : window.innerWidth < 1200
-                                    ? "10vw"
-                                    : "4vw",
-                        });
+                        videoDivRef.current[videoId].style.width =
+                            window.innerWidth < 760
+                                ? "10vw"
+                                : window.innerWidth < 1200
+                                ? "10vw"
+                                : "4vw";
 
-                        gsap.to(span[videoId], {
-                            width: `${currentProgress}%`,
-                            backgroundColor: "white"
-                        })
+                        span[videoId].style.width = `${currentProgress}%`;
+                        span[videoId].style.backgroundColor = "white";
                     }
                 },
                 onComplete: () => {
@@ -163,7 +159,7 @@ const VideoCarousel = () => {
                                 <video
                                     id="video"
                                     playsInline={true}
-                                    preload="auto"
+                                    preload="metadata"
                                     muted
                                     className={`${list.id === 2 && "translate-x-44"} pointer-events-none`}
                                     ref={(el) => (videoRef.current[i] = el)}
