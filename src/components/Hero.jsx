@@ -17,10 +17,15 @@ const Hero = () => {
     };
 
     useEffect(() => {
-        window.addEventListener("resize", handleVideoSrcSet);
-
+        let resizeTimer;
+        const onResize = () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(handleVideoSrcSet, 150);
+        };
+        window.addEventListener("resize", onResize);
         return () => {
-            window.removeEventListener("resize", handleVideoSrcSet);
+            clearTimeout(resizeTimer);
+            window.removeEventListener("resize", onResize);
         };
     }, []);
 
