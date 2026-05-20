@@ -2,8 +2,19 @@ import { OrbitControls, PerspectiveCamera, View, Html } from "@react-three/drei"
 import * as THREE from "three";
 import Lights from "./Lights";
 import IPhone from "./IPhone";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import Loader from "./Loader";
+import { useThree } from "@react-three/fiber";
+import gsap from "gsap";
+
+function GsapInvalidator() {
+    const { invalidate } = useThree();
+    useEffect(() => {
+        gsap.ticker.add(invalidate);
+        return () => gsap.ticker.remove(invalidate);
+    }, [invalidate]);
+    return null;
+}
 
 const ModelView = ({
     index,
@@ -20,6 +31,7 @@ const ModelView = ({
             id={gsapType}
             className={`w-full h-full absolute ${index === 2 ? "right-[-100%]" : ""}`}
         >
+            <GsapInvalidator />
             {/* Ambient light */}
             <ambientLight intensity={0.3} />
             <PerspectiveCamera makeDefault position={[0, 0, 4]} />
@@ -30,7 +42,7 @@ const ModelView = ({
                 enableZoom={false}
                 enablePan={false}
                 rotateSpeed={0.4}
-                target={new THREE.Vector3(0, 0, 0)}
+                target={[0, 0, 0]}
                 onEnd={() => setRotationState(controlRef.current.getAzimuthalAngle())}
             />
             <group ref={groupRef} name={`${index === 1 ? "small" : "large"}`}>
