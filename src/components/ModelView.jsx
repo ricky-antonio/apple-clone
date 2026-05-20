@@ -1,5 +1,4 @@
 import { OrbitControls, PerspectiveCamera, View, Html } from "@react-three/drei";
-import * as THREE from "three";
 import Lights from "./Lights";
 import IPhone from "./IPhone";
 import { Suspense, useEffect } from "react";
