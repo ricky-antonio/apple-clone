@@ -92,6 +92,9 @@ const Model = () => {
                                 overflow: "hidden",
                             }}
                             eventSource={document.getElementById("root")}
+                            frameloop="demand"
+                            dpr={[1, 2]}
+                            gl={{ powerPreference: "high-performance" }}
                         >
                             <View.Port />
                         </Canvas>
