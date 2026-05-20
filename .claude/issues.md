@@ -36,8 +36,8 @@ Issues below are verified against actual source files. Update this file as issue
 8. **`Hero.jsx` — resize handler has no debounce**
    `handleVideoSrcSet` fires on every `resize` event with no throttle, triggering React state updates at high frequency.
 
-9. **`public/models/scene.glb` — Draco compression status unverified**
-   The GLB has not been inspected for Draco compression. If uncompressed, it may be significantly larger than necessary. Verify and apply Draco compression if missing.
+~~9. **`public/models/scene.glb` — Draco compression status unverified**
+   The GLB has not been inspected for Draco compression. If uncompressed, it may be significantly larger than necessary. Verify and apply Draco compression if missing.~~ ✓ Verified: `KHR_draco_mesh_compression` is present (867 KB). No changes needed.
 
 10. **`index.html` — no `<link rel="preload">` for critical assets**
     No preload hints for `scene.glb` or hero videos.

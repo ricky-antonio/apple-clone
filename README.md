@@ -2,7 +2,7 @@
 
 A pixel-faithful recreation of Apple's iPhone 15 Pro product page, built to demonstrate advanced React animation and 3D rendering techniques. Features cinematic scroll-driven transitions, an interactive 3D model viewer, and a custom video carousel — all optimized for smooth performance across devices.
 
-**Live demo:** [ricky-antonio.github.io/apple-clone](https://ricky-antonio.github.io/apple-clone) <!-- replace with your actual URL -->
+**Live demo:** [ricky-antonio.github.io/apple-clone](https://apple-iphone.rickycodes.dev/) 
 
 ![Preview](public/assets/images/hero.jpeg)
 
@@ -27,7 +27,7 @@ A pixel-faithful recreation of Apple's iPhone 15 Pro product page, built to demo
 | Animation | GSAP 3.12 + ScrollTrigger + @gsap/react |
 | Styling | Tailwind CSS 3.4 |
 | Monitoring | Sentry (@sentry/react) |
-| Deployment | Vercel / Netlify / GitHub Pages |
+| Deployment | Vercel |
 
 ---
 
