@@ -2,6 +2,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger);
 
+let _invalidate = null;
+export const setInvalidate = (fn) => { _invalidate = fn; };
+
 export const animateWithGsap = (target, animationProps, scrollProps) => {
     gsap.to(target, {
         ...animationProps,
@@ -22,10 +25,13 @@ export const animateWithGsapTimeline = (
     secondTarget,
     animationProps
 ) => {
+    const onUpdate = () => _invalidate?.();
+
     timeline.to(rotationRef.current.rotation, {
         y: rotationState,
         duration: 1,
         ease: "power2.inOut",
+        onUpdate,
     });
 
     timeline.to(
@@ -33,6 +39,7 @@ export const animateWithGsapTimeline = (
         {
             ...animationProps,
             ease: "power2.inOut",
+            onUpdate,
         },
         "<"
     );
@@ -42,6 +49,7 @@ export const animateWithGsapTimeline = (
         {
             ...animationProps,
             ease: "power2.inOut",
+            onUpdate,
         },
         "<"
     );

@@ -1,16 +1,16 @@
-import { OrbitControls, PerspectiveCamera, View, Html } from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera, View } from "@react-three/drei";
 import Lights from "./Lights";
 import IPhone from "./IPhone";
 import { Suspense, useEffect } from "react";
 import Loader from "./Loader";
 import { useThree } from "@react-three/fiber";
-import gsap from "gsap";
+import { setInvalidate } from "../utils/animations";
 
 function GsapInvalidator() {
     const { invalidate } = useThree();
     useEffect(() => {
-        gsap.ticker.add(invalidate);
-        return () => gsap.ticker.remove(invalidate);
+        setInvalidate(invalidate);
+        return () => setInvalidate(null);
     }, [invalidate]);
     return null;
 }
