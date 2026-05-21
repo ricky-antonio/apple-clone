@@ -65,8 +65,8 @@ Issues below are verified against actual source files. Update this file as issue
 
 ## Low
 
-16. **`vite.config.js` — no manual chunk splitting**
-    Three.js + R3F ship in the same chunk as app code. Add `build.rollupOptions.output.manualChunks`.
+~~16. **`vite.config.js` — no manual chunk splitting**
+    Three.js + R3F ship in the same chunk as app code. Add `build.rollupOptions.output.manualChunks`.~~ ✓ Fixed: `three`, `r3f`, and `gsap` now build as separate cacheable chunks.
 
 ~~17. **`IPhone.jsx` — `.map()` used for side effects**
     `Object.entries(materials).map(...)` used for side effects. Change to `.forEach()`.~~ ✓ Fixed: loop already uses `.forEach()`.
