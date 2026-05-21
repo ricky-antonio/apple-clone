@@ -46,11 +46,11 @@ Issues below are verified against actual source files. Update this file as issue
 
 ## Medium
 
-11. **`main.jsx` — Sentry sampling at 100% in production**
-    `tracesSampleRate: 1.0` and `replaysSessionSampleRate: 1.0` capture everything. Lower to `0.1` for production.
+~~11. **`main.jsx` — Sentry sampling at 100% in production**
+    `tracesSampleRate: 1.0` and `replaysSessionSampleRate: 1.0` capture everything. Lower to `0.1` for production.~~ ✓ Fixed: both lowered to `0.1`; `replaysOnErrorSampleRate` left at `1.0`.
 
-12. **`main.jsx` — wrong Sentry integration**
-    `reactRouterV6BrowserTracingIntegration` is used but the app has no React Router. Remove it.
+~~12. **`main.jsx` — wrong Sentry integration**
+    `reactRouterV6BrowserTracingIntegration` is used but the app has no React Router. Remove it.~~ ✓ Fixed: removed integration and cleaned up unused `React` default import.
 
 13. **`Highlights.jsx` — heading animations fire without ScrollTrigger**
     `gsap.to("#title")` and `gsap.to(".link")` run on mount regardless of scroll position. Add `scrollTrigger` config.
