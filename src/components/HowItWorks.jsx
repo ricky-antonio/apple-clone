@@ -59,8 +59,6 @@ const HowItWorks = () => {
                             <img
                                 src={frameImg}
                                 alt="frame"
-                                width={1392}
-                                height={680}
                                 className="bg-transparent relative z-10"
                             />
                         </div>
