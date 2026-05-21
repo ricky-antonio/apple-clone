@@ -1,21 +1,18 @@
 import React from "react";
-import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { rightImg, watchImg } from "../utils";
+import { animateWithGsap } from "../utils/animations";
 import VideoCarousel from "./VideoCarousel";
 
 const Highlights = () => {
     useGSAP(() => {
-        gsap.to("#title", {
-            opacity: 1,
-            y: 0,
-        });
+        animateWithGsap("#title", { opacity: 1, y: 0 });
 
-        gsap.to(".link", {
+        animateWithGsap(".link", {
             opacity: 1,
             y: 0,
             duration: 1,
-            stagger: 0.25
+            stagger: 0.25,
         });
     }, []);
 
