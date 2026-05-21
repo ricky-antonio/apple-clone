@@ -63,7 +63,6 @@ const Features = () => {
                                 className="w-full h-full object-cover object-center"
                                 preload="none"
                                 muted
-                                autoPlay
                                 ref={videoRef}
                             >
                                 <source src={exploreVideo} type="video/mp4" />

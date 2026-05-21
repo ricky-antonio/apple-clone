@@ -55,8 +55,8 @@ Issues below are verified against actual source files. Update this file as issue
 13. **`Highlights.jsx` — heading animations fire without ScrollTrigger**
     `gsap.to("#title")` and `gsap.to(".link")` run on mount regardless of scroll position. Add `scrollTrigger` config.
 
-14. **`Features.jsx` / `HowItWorks.jsx` — `autoPlay` conflicts with `preload="none"`**
-    Both videos have `autoPlay` + `preload="none"`. Remove `autoPlay`; call `.play()` from ScrollTrigger `onComplete`.
+~~14. **`Features.jsx` / `HowItWorks.jsx` — `autoPlay` conflicts with `preload="none"`**
+    Both videos have `autoPlay` + `preload="none"`. Remove `autoPlay`; call `.play()` from ScrollTrigger `onComplete`.~~ ✓ Fixed: removed `autoPlay` from both; `Features.jsx` uses existing `onComplete` trigger; `HowItWorks.jsx` now uses `onEnter`/`onLeaveBack` ScrollTrigger.
 
 15. **`IPhone.jsx` — `needsUpdate = true` set on all materials unconditionally**
     On every color change all materials are marked dirty, forcing GPU re-upload of everything.

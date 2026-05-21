@@ -18,6 +18,14 @@ const HowItWorks = () => {
             duration: 2,
             ease: "power2.inOut",
         });
+        gsap.to(videoRef.current, {
+            scrollTrigger: {
+                trigger: "#chip",
+                start: "20% bottom",
+                onEnter: () => videoRef.current?.play(),
+                onLeaveBack: () => videoRef.current?.pause(),
+            },
+        });
         animateWithGsap(".g_fadeIn", {
             opacity: 1,
             y: 0,
@@ -60,7 +68,6 @@ const HowItWorks = () => {
                                 playsInline
                                 preload="none"
                                 muted
-                                autoPlay
                                 ref={videoRef}
                             >
                                 <source src={frameVideo} type="video/mp4" />
