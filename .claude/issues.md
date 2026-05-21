@@ -58,8 +58,8 @@ Issues below are verified against actual source files. Update this file as issue
 ~~14. **`Features.jsx` / `HowItWorks.jsx` — `autoPlay` conflicts with `preload="none"`**
     Both videos have `autoPlay` + `preload="none"`. Remove `autoPlay`; call `.play()` from ScrollTrigger `onComplete`.~~ ✓ Fixed: removed `autoPlay` from both; `Features.jsx` uses existing `onComplete` trigger; `HowItWorks.jsx` now uses `onEnter`/`onLeaveBack` ScrollTrigger.
 
-15. **`IPhone.jsx` — `needsUpdate = true` set on all materials unconditionally**
-    On every color change all materials are marked dirty, forcing GPU re-upload of everything.
+~~15. **`IPhone.jsx` — `needsUpdate = true` set on all materials unconditionally**
+    On every color change all materials are marked dirty, forcing GPU re-upload of everything.~~ ✓ Fixed: `needsUpdate` moved inside the if-block; only materials whose color actually changed are marked dirty.
 
 ---
 
@@ -68,8 +68,8 @@ Issues below are verified against actual source files. Update this file as issue
 16. **`vite.config.js` — no manual chunk splitting**
     Three.js + R3F ship in the same chunk as app code. Add `build.rollupOptions.output.manualChunks`.
 
-17. **`IPhone.jsx` — `.map()` used for side effects**
-    `Object.entries(materials).map(...)` used for side effects. Change to `.forEach()`.
+~~17. **`IPhone.jsx` — `.map()` used for side effects**
+    `Object.entries(materials).map(...)` used for side effects. Change to `.forEach()`.~~ ✓ Fixed: loop already uses `.forEach()`.
 
 18. **Image assets — JPEGs not converted to WebP**
     Color variant images (`black.jpg`, `blue.jpg`, `white.jpg`, `yellow.jpg`) and explore images (`explore1.jpg`, `explore2.jpg`) are raw JPEGs. Converting to WebP saves ~25–35% file size with no visual difference.
