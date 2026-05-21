@@ -10,7 +10,11 @@ function GsapInvalidator() {
     const { invalidate } = useThree();
     useEffect(() => {
         setInvalidate(invalidate);
-        return () => setInvalidate(null);
+        window.addEventListener("scroll", invalidate, { passive: true });
+        return () => {
+            setInvalidate(null);
+            window.removeEventListener("scroll", invalidate);
+        };
     }, [invalidate]);
     return null;
 }
