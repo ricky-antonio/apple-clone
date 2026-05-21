@@ -30,8 +30,8 @@ Issues below are verified against actual source files. Update this file as issue
 ~~6. **`ModelView.jsx` — `new THREE.Vector3()` allocated in JSX prop**
    `target={new THREE.Vector3(0, 0, 0)}` allocates a new object on every render. Replace with `target={[0, 0, 0]}`.~~ ✓ Fixed: `target={[0, 0, 0]}`.
 
-7. **`IPhone.jsx` — all ~30 meshes have `castShadow` and `receiveShadow`**
-   Every mesh participates in shadow calculations. Disable globally on Canvas or per-mesh where shadows aren't visually necessary.
+~~7. **`IPhone.jsx` — all ~30 meshes have `castShadow` and `receiveShadow`**
+   Every mesh participates in shadow calculations. Disable globally on Canvas or per-mesh where shadows aren't visually necessary.~~ ✓ Fixed: removed `castShadow` and `receiveShadow` from all 31 meshes. The Canvas has no `shadows` prop so shadow maps were never enabled — these were dead code.
 
 ~~8. **`Hero.jsx` — resize handler has no debounce**
    `handleVideoSrcSet` fires on every `resize` event with no throttle, triggering React state updates at high frequency.~~ ✓ Fixed: `clearTimeout` / `setTimeout` debounce at 150ms.
@@ -82,8 +82,6 @@ Issues below are verified against actual source files. Update this file as issue
 
 ---
 
-## Open (1 remaining)
+## Open
 
-| # | File | Issue | Priority |
-|---|---|---|---|
-| 7 | `IPhone.jsx` | All ~30 meshes have `castShadow` + `receiveShadow` — disable on Canvas or per-mesh | High |
+No open issues. All 18 confirmed issues resolved.
