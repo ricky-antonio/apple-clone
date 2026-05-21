@@ -71,8 +71,8 @@ Issues below are verified against actual source files. Update this file as issue
 ~~17. **`IPhone.jsx` — `.map()` used for side effects**
     `Object.entries(materials).map(...)` used for side effects. Change to `.forEach()`.~~ ✓ Fixed: loop already uses `.forEach()`.
 
-18. **Image assets — JPEGs not converted to WebP**
-    Color variant images (`black.jpg`, `blue.jpg`, `white.jpg`, `yellow.jpg`) and explore images (`explore1.jpg`, `explore2.jpg`) are raw JPEGs. Converting to WebP saves ~25–35% file size with no visual difference.
+~~18. **Image assets — JPEGs not converted to WebP**
+    Color variant images (`black.jpg`, `blue.jpg`, `white.jpg`, `yellow.jpg`) and explore images (`explore1.jpg`, `explore2.jpg`) are raw JPEGs. Converting to WebP saves ~25–35% file size with no visual difference.~~ ✓ Fixed: all 6 converted to WebP at quality 85 (~60–66% size reduction on color images); imports updated in `src/utils/index.js`.
 
 ---
 
@@ -105,5 +105,5 @@ Issues below are verified against actual source files. Update this file as issue
 
 4. **Low:**
    - `vite.config.js` — add manual chunk splitting for three.js + R3F
-   - Image assets — convert JPEGs to WebP
+   - ~~Image assets — convert JPEGs to WebP~~ ✓
    - Mobile — reduce Canvas quality on `window.innerWidth < 768`
