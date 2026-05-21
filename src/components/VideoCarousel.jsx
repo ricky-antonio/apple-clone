@@ -214,6 +214,8 @@ const VideoCarousel = () => {
                 </div>
                 <button className="control-btn">
                     <img
+                        width={18}
+                        height={18}
                         src={
                             isLastVideo
                                 ? replayImg

@@ -55,6 +55,7 @@ const Hero = () => {
                         muted
                         playsInline={true}
                         key={videoSrc}
+                        poster="/assets/images/hero.jpeg"
                     >
                         <source src={videoSrc} type="video/mp4" />
                     </video>

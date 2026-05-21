@@ -26,8 +26,8 @@ import white from "/assets/images/white.webp";
 import black from "/assets/images/black.webp";
 import explore1 from "/assets/images/explore1.webp";
 import explore2 from "/assets/images/explore2.webp";
-import chip from "/assets/images/chip.jpeg";
-import frame from "/assets/images/frame.png";
+import chip from "/assets/images/chip.webp";
+import frame from "/assets/images/frame.webp";
 
 export const heroVideo = hmv;
 export const smallHeroVideo = smallmv;
