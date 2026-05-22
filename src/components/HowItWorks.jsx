@@ -68,6 +68,7 @@ const HowItWorks = () => {
                                 playsInline
                                 preload="none"
                                 muted
+                                loop
                                 ref={videoRef}
                             >
                                 <source src={frameVideo} type="video/mp4" />
