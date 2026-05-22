@@ -2,19 +2,19 @@
 
 A pixel-faithful recreation of Apple's iPhone 15 Pro product page, built to demonstrate advanced React animation and 3D rendering techniques. Features cinematic scroll-driven transitions, an interactive 3D model viewer, and a custom video carousel — all optimized for smooth performance across devices.
 
-**Live demo:** [ricky-antonio.github.io/apple-clone](https://apple-iphone.rickycodes.dev/) 
+**Live demo:** [phone-store.rickycodes.dev](https://phone-store.rickycodes.dev/)
 
 ![Preview](public/assets/images/hero.jpeg)
 
 ---
 
-## What's in it
+## Features
 
-- **Interactive 3D iPhone model** — rendered with Three.js via React Three Fiber. Users can rotate the model by dragging and switch between four finish colors (Black Titanium, Blue Titanium, White Titanium, Natural Titanium). The Canvas uses `frameloop="demand"` so the GPU only draws when something actually changes.
-- **Scroll-driven animations** — every section transition uses GSAP ScrollTrigger, matching the timing and easing of Apple's original page.
-- **Video carousel** — four auto-advancing highlight clips with a GSAP-animated progress bar and manual scrubbing. Videos use `preload="none"` so only the active clip loads.
-- **Responsive hero video** — swaps between full and mobile sources based on viewport width.
-- **Error monitoring** — Sentry integrated for production error and performance tracking.
+- **Interactive 3D iPhone model** — drag to rotate, switch between four titanium finishes. Rendered in the browser with WebGL via React Three Fiber with a Draco-compressed GLB asset.
+- **Scroll-driven animations** — every section entrance and transition is orchestrated with GSAP ScrollTrigger, matching the timing and easing of Apple's original page.
+- **Video carousel** — four highlight clips with a synchronized animated progress bar, play/pause controls, and automatic advancement.
+- **Responsive hero** — swaps between full-resolution and mobile video sources based on viewport width.
+- **Scroll-triggered section videos** — the chip and explore videos start playing as they enter the viewport and pause when they leave, with no wasted bandwidth on hidden content.
 
 ---
 
@@ -23,27 +23,27 @@ A pixel-faithful recreation of Apple's iPhone 15 Pro product page, built to demo
 | | |
 |---|---|
 | Framework | React 19 + Vite 6 (SWC) |
-| 3D | Three.js 0.174, @react-three/fiber 9, @react-three/drei 10 |
-| Animation | GSAP 3.12 + ScrollTrigger + @gsap/react |
+| 3D | Three.js, React Three Fiber, React Three Drei |
+| Animation | GSAP 3 + ScrollTrigger |
 | Styling | Tailwind CSS 3.4 |
-| Monitoring | Sentry (@sentry/react) |
+| Monitoring | Sentry |
 | Deployment | Vercel |
 
 ---
 
-## Engineering highlights
+## How it's built
 
-**Demand rendering with React Three Fiber**
-The Canvas runs `frameloop="demand"` rather than the default continuous loop. A `GsapInvalidator` component subscribes `invalidate()` to GSAP's global ticker so the scene re-renders during animation, then goes fully idle when no animation is active. This eliminates constant GPU load while the user reads other sections of the page.
+**3D rendering with React Three Fiber**
+The iPhone model is loaded from a Draco-compressed GLB file and rendered inside an R3F Canvas. Two `View` portals — one per model size (6.1" and 6.7") — share a single fixed Canvas that spans the full viewport, allowing the 3D scene to appear anchored inside a normal scrolling layout. OrbitControls handle touch and mouse drag. The renderer runs on-demand rather than in a continuous loop, so the GPU is fully idle when the user isn't interacting with the model.
 
-**GSAP tween storm fix**
-The original video carousel implementation called `gsap.to()` inside an `onUpdate` callback (~60 calls/sec), creating hundreds of orphaned tweens per minute. Replaced with direct DOM style mutation for zero GC pressure during playback.
+**Scroll animations with GSAP**
+All entrance animations and the size-switch transition are driven by GSAP timelines and ScrollTrigger. The model rotation between 6.1" and 6.7" uses a shared timeline ref that animates both the Three.js object rotation and the DOM view transition simultaneously. Section headings, explore images, and chip reveal all use scroll-triggered opacity and transform animations.
 
-**Timeline memory management**
-GSAP timelines for the model rotation were being created on every React render. Moved into a `useRef` so one timeline is created and reused for the component's lifetime.
+**Video carousel**
+The four highlight videos advance automatically and are controlled by a GSAP progress bar that tracks each clip's playback position in real time. A single animated `<span>` tracks progress per video while dot indicators show which clip is active. Users can pause, resume, and replay from a single control button.
 
-**Scoped material updates**
-The iPhone model has ~30 meshes. Color changes now set `needsUpdate = true` only on materials whose color actually changed, rather than forcing a full GPU re-upload of every material on each color swap.
+**Performance**
+Three.js and React Three Fiber are code-split into separate chunks and lazy-loaded only when the model section scrolls into view, keeping the initial JS payload focused on above-the-fold content. Images are served as WebP. Critical assets — the GLB model and hero video — are preloaded in the document head.
 
 ---
 
@@ -55,29 +55,6 @@ npm run dev
 ```
 
 Open [http://localhost:5173](http://localhost:5173).
-
----
-
-## Project structure
-
-```
-src/
-  components/
-    Hero.jsx          # Responsive hero video with resize handling
-    Highlights.jsx    # Section header + VideoCarousel
-    VideoCarousel.jsx # GSAP-driven video carousel with progress bar
-    Model.jsx         # Color/size picker + R3F Canvas
-    ModelView.jsx     # R3F View per model size
-    IPhone.jsx        # 3D iPhone model (GLTF, ~30 meshes)
-    Lights.jsx        # Three-point lighting + environment map
-    Features.jsx      # Explore section with scroll-triggered video
-    HowItWorks.jsx    # Chip section with scroll-triggered video
-  utils/
-    animations.js     # Shared GSAP helpers
-    index.js          # Asset exports
-  constants/
-    index.js          # Nav links, model colors/sizes, slide data
-```
 
 ---
 
