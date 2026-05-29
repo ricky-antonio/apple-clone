@@ -26,17 +26,19 @@ export default defineConfig({
 
   build: {
     sourcemap: true,
-    modulePreload: {
-      resolveDependencies(filename, deps) {
-        return deps.filter(dep => !dep.includes('three') && !dep.includes('r3f'));
-      }
-    },
     rollupOptions: {
       output: {
-        manualChunks: {
-          three: ["three"],
-          r3f: ["@react-three/fiber", "@react-three/drei"],
-          gsap: ["gsap", "@gsap/react"],
+        // Only split the EAGER vendor libs (react, gsap) into their own chunks
+        // for cross-deploy caching. Deliberately do NOT name-chunk three /
+        // @react-three: they're reachable only via the lazy() Model import, so
+        // Vite's default splitting keeps them in async chunks that load on
+        // scroll. Forcing them into named chunks pulled React / the vite-preload
+        // helper into the r3f chunk, making the entry import ~335 KB of 3D code
+        // eagerly and parse it before first paint.
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return;
+          if (id.includes("@gsap") || /[\\/]node_modules[\\/]gsap[\\/]/.test(id)) return "gsap";
+          if (/[\\/]node_modules[\\/](react-dom|react|scheduler)[\\/]/.test(id)) return "react";
         },
       },
     },
