@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { heroVideo, smallHeroVideo } from "../utils";
 
 const Hero = () => {
+    const videoRef = useRef(null);
     const [videoSrc, setVideoSrc] = useState(
         window.innerWidth < 760 ? smallHeroVideo : heroVideo
     );
@@ -14,6 +15,24 @@ const Hero = () => {
         } else {
             setVideoSrc(heroVideo);
         }
+    };
+
+    // Loop the hero clip with a fade-out/in through the black backdrop so the
+    // restart feels seamless instead of an abrupt jump back to frame one.
+    const handleVideoEnd = () => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        gsap.to(video, {
+            opacity: 0,
+            duration: 0.5,
+            ease: "power1.out",
+            onComplete: () => {
+                video.currentTime = 0;
+                video.play()?.catch(() => {});
+                gsap.to(video, { opacity: 1, duration: 0.5, ease: "power1.in" });
+            },
+        });
     };
 
     useEffect(() => {
@@ -50,12 +69,14 @@ const Hero = () => {
                 </p>
                 <div className="md:w-10/12 w-9/12">
                     <video
+                        ref={videoRef}
                         className="pointer-events-none"
                         autoPlay
                         muted
                         playsInline={true}
                         key={videoSrc}
                         poster="/assets/images/hero.webp"
+                        onEnded={handleVideoEnd}
                     >
                         <source src={videoSrc} type="video/mp4" />
                     </video>
