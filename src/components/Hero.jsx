@@ -25,12 +25,12 @@ const Hero = () => {
 
         gsap.to(video, {
             opacity: 0,
-            duration: 0.5,
+            duration: 0.3,
             ease: "power1.out",
             onComplete: () => {
                 video.currentTime = 0;
                 video.play()?.catch(() => {});
-                gsap.to(video, { opacity: 1, duration: 0.5, ease: "power1.in" });
+                gsap.to(video, { opacity: 1, duration: 0.3, ease: "power1.in" });
             },
         });
     };
