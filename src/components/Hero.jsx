@@ -17,12 +17,6 @@ const Hero = () => {
     };
 
     useEffect(() => {
-        // Remove the static LCP poster overlay now that the Hero (and its
-        // video poster) has mounted; see index.html #hero-lcp-img.
-        document.getElementById("hero-lcp-img")?.remove();
-    }, []);
-
-    useEffect(() => {
         let resizeTimer;
         const onResize = () => {
             clearTimeout(resizeTimer);
